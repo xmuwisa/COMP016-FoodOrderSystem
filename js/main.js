@@ -121,49 +121,45 @@ function renderItems() {
             return `
         <div 
           class="item" 
-          style="width: 100px; border: 2px solid red; opacity: ${
-              isAvailable ? 1 : 0.5
-          }"
+          style="opacity: ${isAvailable ? 1 : 0.5}"
         >
           ${
               isAvailable
                   ? `<a 
                     href="details.html?id=${item.id}&type=${itemType}" 
-                    style="text-decoration: none; color: inherit;"
+                    class="item-available"
                  >
                     <img 
                       src="${item.image}" 
                       alt="${item.name}" 
-                      style="width: 100px; height: 100px;" 
                     />
-                    <div>
-                      <h3>${item.name}</h3>
-                      <p>${item.desc}</p>
+                    <div class="item-info">
+                      <span class="name">${item.name}</span>
+                      <span>${item.desc}</span>
                       ${
                           item.servingSize
-                              ? `<p><strong>Serving Size:</strong> ${item.servingSize}</p>`
+                              ? `<div class="serving"><span>Serving Size:</span> ${item.servingSize}</div>`
                               : ""
                       }
-                      <p><strong>Price:</strong> ₱${item.price}</p>
+                      <div class="price">Price: ₱${item.price}</div>
                     </div>
                 </a>`
-                  : `<span class="unavailable">
+                  : `<div class="unavailable item-unavailable">
                   <img 
                     src="${item.image}" 
                     alt="${item.name}" 
-                    style="width: 100px; height: 100px;" 
                   />
-                  <div>
-                    <h3>${item.name}</h3>
-                    <p>${item.desc}</p>
-                    ${
-                        item.servingSize
-                            ? `<p><strong>Serving Size:</strong> ${item.servingSize}</p>`
-                            : ""
-                    }
-                    <p><strong>Price:</strong> ₱${item.price}</p>
-                  </div>
-                </span>`
+                  <div class="item-info">
+                      <span class="name">${item.name}</span>
+                      <span>${item.desc}</span>
+                      ${
+                          item.servingSize
+                              ? `<div class="serving"><span>Serving Size:</span> ${item.servingSize}</div>`
+                              : ""
+                      }
+                      <div class="price">Price: ₱${item.price}</div>
+                    </div>
+                </div>`
           }
         </div>
       `;

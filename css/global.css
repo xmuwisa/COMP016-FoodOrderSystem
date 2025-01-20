@@ -78,6 +78,7 @@ body {
     border: 2px solid #222222;
     box-shadow: 0 25px 0px 10px #222222;
     padding: 16px;
+    min-height: 100svh;
 }
 
 .child-container .logo-name {
