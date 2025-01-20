@@ -1,0 +1,88 @@
+.tabs {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 0 10px 0;
+}
+
+.tabs .tab-button {
+    width: 50%;
+    padding: 20px;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    opacity: 0.8;
+    cursor: pointer;
+    border: 2px solid #222222;
+    transition: all 0.3s ease-in-out;
+}
+
+.tabs .tab-button:hover {
+    opacity: 1;
+    color: #b53440;
+    border: 2px solid #722128;
+}
+
+.tabs .tab-button.active {
+    color: #b53440;
+    font-weight: 600;
+    background-color: #f1592634;
+}
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 2px;
+    padding: 10px 0px 20px 0;
+}
+
+.filters div {
+    border: 2px solid #222222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 8px;
+    padding: 4px 4px 4px 10px;
+}
+
+.filters label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-icon {
+    width: 20px;
+    height: 20px;
+    color: #b53440;
+}
+
+.filter-select {
+    width: 100px;
+    border: none;
+    padding: 4px;
+}
+
+@media (max-width: 600px) {
+    .tabs .tab-button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .filters div {
+        border: 2px solid #222222;
+        gap: 2px;
+        padding: 2px 2px 2px 8px;
+    }
+
+    .filter-icon {
+        width: 15px;
+        height: 15px;
+        color: #b53440;
+    }
+}
