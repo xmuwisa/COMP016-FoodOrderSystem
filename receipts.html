@@ -33,16 +33,19 @@
 
             <div class="child-container">
                 <div class="logo-name">RECEIPTS</div>
-                <h1>Receipts</h1>
-
                 <!-- Receipts list container -->
-                <div id="receiptsList"></div>
+                <div id="receiptsList" class="receipts-list"></div>
 
                 <!-- Popup overlay for showing receipt details (initially hidden) -->
                 <div id="receiptDetailsOverlay" class="popup-container">
-                    <div id="receiptDetailsPopup" class="popup-container">
-                        <div id="receiptDetailsContent"></div>
-                        <button id="closeDetailsBtn">Close</button>
+                    <div id="receiptDetailsPopup" class="popup-form">
+                        <div
+                            id="receiptDetailsContent"
+                            class="receipt-details-content"
+                        ></div>
+                        <div class="receipt-button">
+                            <button id="closeDetailsBtn">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>

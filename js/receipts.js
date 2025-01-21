@@ -14,25 +14,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderReceipts() {
         if (receipts.length === 0) {
-            receiptsList.innerHTML = "<p>No receipts found.</p>";
+            receiptsList.innerHTML =
+                "<div class='no-receipt'>Uh oh. No receipts here...</div>";
             return;
         }
 
         let html = "";
         receipts.forEach((receipt, index) => {
             html += `
-          <div style="border: 1px solid #000; margin-bottom: 10px; padding: 10px;">
-            <p>Receipt No: <strong>${receipt.receiptNumber}</strong></p>
-            <p>Date/Time: ${receipt.dateTime}</p>
-            <p>Total: ₱${receipt.total}</p>
-            <button class="viewReceiptBtn" data-index="${index}">View Details</button>
+          <div class="receipt">
+            <div class="rcp-num">${receipt.receiptNumber}</div>
+            <div><span>Date/Time: </span>${receipt.dateTime}</div>
+            <div><span>Total: </span>₱${receipt.total}</div>
+            <div class="view-receipt">
+                <button data-index="${index}">View Details</button>
+            </div>
           </div>
         `;
         });
 
         receiptsList.innerHTML = html;
 
-        const viewButtons = document.querySelectorAll(".viewReceiptBtn");
+        const viewButtons = document.querySelectorAll(".view-receipt");
         viewButtons.forEach((btn) => {
             btn.addEventListener("click", (e) => {
                 const idx = parseInt(e.target.dataset.index, 10);
@@ -45,46 +48,75 @@ document.addEventListener("DOMContentLoaded", () => {
         const r = receipts[index];
         if (!r) return;
         let detailsHtml = `
-        <h2>Receipt # ${r.receiptNumber}</h2>
-        <p><strong>Date/Time:</strong> ${r.dateTime}</p>
-        <p><strong>Name:</strong> ${r.name}</p>
-        <p><strong>Contact:</strong> ${r.contact}</p>
-        <p><strong>Notes:</strong> ${r.notes}</p>
-        <p><strong>Order Type:</strong> ${r.orderType}</p>
-        <h3>Items:</h3>
-      `;
+        <div class="rcp-num-title">${r.receiptNumber}</div>
+        <div><span>Date/Time:</span> ${r.dateTime}</div>
+        <div><span>Name:</span> ${r.name}</div>
+        <div><span>Contact:</span> ${r.contact}</div>
+        <div><span>Notes:</span> ${r.notes}</div>
+        <div><span>Order Type:</span> ${r.orderType}</p>
+        <span class="emp">Items</span>
+        <table class="receipt-items-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Qty</th>
+                    <th>Option</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
 
         r.items.forEach((item) => {
             detailsHtml += `
-          <div style="margin-left: 20px;">
-            <p>
-              <strong>${item.name}</strong>
-              (Qty: ${item.quantity})
-              ${
-                  item.option
-                      ? `(${item.type === "sushi" ? "Spice:" : "Size:"} ${
-                            item.option
-                        })`
-                      : ""
-              }
-            </p>
-            <p>Subtotal: ₱${item.totalCost}</p>
-          </div>
-        `;
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.quantity}</td>
+                <td>${
+                    item.option
+                        ? item.type === "sushi"
+                            ? `Spice: ${item.option}`
+                            : `Size: ${item.option}`
+                        : "N/A"
+                }</td>
+                <td>₱${item.totalCost}</td>
+            </tr>
+            `;
         });
 
+        detailsHtml += `
+            </tbody>
+        </table>
+        `;
+
         if (r.extras && r.extras.length > 0) {
-            detailsHtml += `<h3>Extras:</h3>`;
+            detailsHtml += `<span class="emp">Extras</span>
+            <table class="receipt-extras-table">
+                <thead>
+                    <tr>
+                        <th>Extra</th>
+                        <th>Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+
             r.extras.forEach((ex) => {
                 detailsHtml += `
-            <p style="margin-left: 20px;">
-              ${ex.name} - ₱${ex.cost}
-            </p>
-          `;
+                <tr>
+                    <td>${ex.name}</td>
+                    <td>₱${ex.cost}</td>
+                </tr>
+                `;
             });
+
+            detailsHtml += `
+                </tbody>
+            </table>
+            `;
         }
 
-        detailsHtml += `<h2>Total: ₱${r.total}</h2>`;
+        detailsHtml += `<div class="total">Total: ₱${r.total}</div>`;
 
         receiptDetailsContent.innerHTML = detailsHtml;
         receiptDetailsOverlay.style.display = "flex";

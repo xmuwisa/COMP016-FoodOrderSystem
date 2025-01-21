@@ -148,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .getElementById("cancelButton")
             .addEventListener("click", () => {
                 popupOverlay.style.display = "none";
+                location.reload();
             });
 
         document
