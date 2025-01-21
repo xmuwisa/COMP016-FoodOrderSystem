@@ -33,33 +33,20 @@
 
             <div class="child-container">
                 <!-- Item details container -->
-                <div id="detailsContainer"></div>
+                <div id="detailsContainer" class="details-container"></div>
 
                 <!-- Popup form overlay (initially hidden) -->
-                <div
-                    id="popupOverlay"
-                    style="
-                        display: none;
-                        position: fixed;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        background: rgba(0, 0, 0, 0.5);
-                    "
-                >
-                    <div
-                        id="popupForm"
-                        style="
-                            max-width: 400px;
-                            margin: 100px auto;
-                            background: #fff;
-                            padding: 20px;
-                        "
-                    >
-                        <div id="popupContent"></div>
-                        <button id="cancelButton">Cancel</button>
-                        <button id="addToCartButton">Add</button>
+                <div id="popupOverlay" class="popup-container">
+                    <div id="popupForm" class="popup-form">
+                        <div id="popupContent" class="popup-content"></div>
+                        <div class="popup-buttons">
+                            <button id="cancelButton" class="cancel">
+                                Cancel
+                            </button>
+                            <button id="addToCartButton" class="confirm">
+                                Add
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

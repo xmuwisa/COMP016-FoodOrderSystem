@@ -36,42 +36,50 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         detailsContainer.innerHTML = `
-        <h1>${item.name}</h1>
-        <img
-            src="${item.image}"
-            alt="${item.name}"
-            style="width: 200px; height: 200px;"
-        />
-        <p>${item.desc}</p>
-        ${
-            item.servingSize
-                ? `<p><strong>Serving Size:</strong> ${item.servingSize}</p>`
-                : ""
-        }
-        <p><strong>Price:</strong> ₱${item.price}</p>
-        ${
-            itemType === "sushi" && item.ingredients
-                ? `<p><strong>Ingredients:</strong> ${item.ingredients.join(
-                      ", "
-                  )}</p>`
-                : ""
-        }
-        ${
-            itemType === "sushi" && item.inclusion
-                ? `<p><strong>Inclusion:</strong> ${item.inclusion.join(
-                      ", "
-                  )}</p>`
-                : ""
-        }
-        ${
-            itemType === "sushi" && item.allergens
-                ? `<p><strong>Allergens:</strong> ${item.allergens.join(
-                      ", "
-                  )}</p>`
-                : ""
-        }
-        <p><strong>Preparation Time:</strong> ${item.prepMinutes} mins.</p>
-        <button id="showPopupButton">Add to Cart</button>
+        <span class="logo-name item-name">
+            ${item.name}
+        </span>
+        <div class="item">
+            <img
+                    src="${item.image}"
+                    alt="${item.name}"
+                />
+            <div class="item-details">
+                <div class="add-to-cart"><button id="showPopupButton">Add to Cart</button></div>
+                <div class="item-desc">${item.desc}</div>
+                ${
+                    item.servingSize
+                        ? `<div><span>Serving Size:</span> ${item.servingSize}</div>`
+                        : ""
+                }
+                ${
+                    itemType === "sushi" && item.ingredients
+                        ? `<div><span>Ingredients:</span> ${item.ingredients.join(
+                              ", "
+                          )}</div>`
+                        : ""
+                }
+                ${
+                    itemType === "sushi" && item.inclusion
+                        ? `<div><span>Inclusion:</span> ${item.inclusion.join(
+                              ", "
+                          )}</div>`
+                        : ""
+                }
+                ${
+                    itemType === "sushi" && item.allergens
+                        ? `<div><span>Allergens:</span> ${item.allergens.join(
+                              ", "
+                          )}</div>`
+                        : ""
+                }
+                <div><span>Preparation Time:</span> ${
+                    item.prepMinutes
+                } mins.</div>
+                <div class="item-price"><span>Price:</span> ₱${item.price}</div>
+            </div>
+        </div>
+        
     `;
 
         document
@@ -84,33 +92,37 @@ document.addEventListener("DOMContentLoaded", () => {
     function showPopupForm(type) {
         const popupOverlay = document.getElementById("popupOverlay");
         const popupContent = document.getElementById("popupContent");
-        popupOverlay.style.display = "block";
+        popupOverlay.style.display = "flex";
 
         let formHtml = `
-      <label>Quantity:
-        <button type="button" id="decrementQty">-</button>
-        <span id="qtyValue">1</span>
-        <button type="button" id="incrementQty">+</button>
-      </label>
-      <br/><br/>
-    `;
+        <div>
+            <span class="emp">Quantity</span>
+            <span class="quantity-control">
+                <button type="button" id="decrementQty">-</button>
+                <span id="qtyValue" class="quantity-value">1</span>
+                <button type="button" id="incrementQty">+</button>
+            </span>
+        </div>
+        `;
 
         if (type === "sushi") {
             formHtml += `
-        <label>Spice Level:</label>
-        <br/>
-        <label><input type="radio" name="spiceLevel" value="Regular" checked /> Regular</label>
-        <label><input type="radio" name="spiceLevel" value="Mild" /> Mild</label>
-        <label><input type="radio" name="spiceLevel" value="Hot" /> Hot</label>
-      `;
+            <div>
+                <span class="emp">Spice Level</span>
+                <label><input type="radio" name="spiceLevel" value="Regular" checked /> Regular</label>
+                <label><input type="radio" name="spiceLevel" value="Mild" /> Mild</label>
+                <label><input type="radio" name="spiceLevel" value="Hot" /> Hot</label>
+            </div>
+        `;
         } else {
             formHtml += `
-        <label>Size:</label>
-        <br/>
-        <label><input type="radio" name="drinkSize" value="Small" checked /> Small</label>
-        <label><input type="radio" name="drinkSize" value="Medium" /> Medium</label>
-        <label><input type="radio" name="drinkSize" value="Large" /> Large</label>
-      `;
+            <div>
+                <span class="emp">Size</span>
+                <label><input type="radio" name="drinkSize" value="Small" checked /> Small</label>
+                <label><input type="radio" name="drinkSize" value="Medium" /> Medium</label>
+                <label><input type="radio" name="drinkSize" value="Large" /> Large</label>
+            </div>
+        `;
         }
 
         popupContent.innerHTML = formHtml;

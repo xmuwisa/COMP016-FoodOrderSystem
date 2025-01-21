@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function showOrderForm() {
-        orderPopupOverlay.style.display = "block";
+        orderPopupOverlay.style.display = "flex";
 
         let summaryHtml = "";
         let cartTotal = 0;

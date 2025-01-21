@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
         detailsHtml += `<h2>Total: ₱${r.total}</h2>`;
 
         receiptDetailsContent.innerHTML = detailsHtml;
-        receiptDetailsOverlay.style.display = "block";
+        receiptDetailsOverlay.style.display = "flex";
     }
 
     closeDetailsBtn.addEventListener("click", () => {
