@@ -206,5 +206,6 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("cart", JSON.stringify(cart));
 
         document.getElementById("popupOverlay").style.display = "none";
+        location.reload();
     }
 });

@@ -120,13 +120,39 @@ body {
     background: #fcfcfc;
     padding: 26px;
     border: 2px solid #222222;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
     transition: all 0.3s ease-in-out;
     position: relative;
     border-radius: 10px;
+    max-height: 80%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .popup-form input[type="radio"] {
     margin-right: 10px;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #222222 #fcfcfc;
+}
+
+*::-webkit-scrollbar {
+    width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #fcfcfc;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #222222;
+    border-radius: 5px;
+    border: 3px none #222222;
 }
 
 @media (max-width: 1280px) {

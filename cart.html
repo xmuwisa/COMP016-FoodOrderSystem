@@ -33,212 +33,243 @@
 
             <div class="child-container">
                 <div class="logo-name">MY CART</div>
-                <h1>Cart Items</h1>
 
-                <!-- Cart List Container -->
-                <div id="cartItemsList"></div>
-
-                <!-- Order Now button -->
-                <button id="orderNowButton">Order Now</button>
+                <div class="cart-button">
+                    <button id="orderNowButton" class="order">Order</button>
+                    <button id="clearCartButton" class="clear">Clear</button>
+                </div>
+                <!-- Cart Items List -->
+                <div id="cartItemsList" class="item-list"></div>
 
                 <!-- Popup Overlay for the Order Form (initially hidden) -->
                 <div id="orderPopupOverlay" class="popup-container">
-                    <div
-                        id="orderPopupForm"
-                        style="
-                            background: #fff;
-                            max-width: 500px;
-                            margin: 50px auto;
-                            padding: 20px;
-                            position: relative;
-                        "
-                    >
-                        <h2>Finalize Order</h2>
-                        <!-- Items Summary -->
-                        <div id="orderItemsSummary"></div>
+                    <div id="orderPopupForm" class="popup-form">
+                        <span class="order-form-title">ORDER FORM</span>
+                        <div class="order-content">
+                            <!-- Items Summary -->
+                            <span class="emp">Item List</span>
+                            <div
+                                id="orderItemsSummary"
+                                class="order-summary-content"
+                            ></div>
 
-                        <!-- Form for Name, Contact, Notes -->
-                        <label for="customerName">Name:</label>
-                        <input type="text" id="customerName" />
-                        <br /><br />
+                            <!-- Customer Details -->
+                            <span class="emp">Customer Information</span>
+                            <div class="customer-inputs">
+                                <div class="customer-contact">
+                                    <input
+                                        type="text"
+                                        id="customerName"
+                                        placeholder="Name"
+                                        required
+                                    />
 
-                        <label for="contactNumber">Contact Number:</label>
-                        <input type="text" id="contactNumber" />
-                        <br /><br />
+                                    <input
+                                        type="text"
+                                        id="contactNumber"
+                                        placeholder="Contact Number"
+                                        required
+                                    />
+                                </div>
 
-                        <label for="additionalNotes">Notes:</label>
-                        <textarea id="additionalNotes"></textarea>
-                        <br /><br />
+                                <textarea
+                                    id="additionalNotes"
+                                    placeholder="Additional Notes"
+                                ></textarea>
+                            </div>
+                            <div class="order-type">
+                                <span class="emp">Spice Level</span>
+                                <div>
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="orderType"
+                                            value="Dine-In"
+                                            checked
+                                        />
+                                        Dine-In
+                                    </label>
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="orderType"
+                                            value="Take-Out"
+                                        />
+                                        Take-Out
+                                    </label>
+                                </div>
+                            </div>
 
-                        <!-- Radio Buttons for Dine-in / Take-out -->
-                        <label>
-                            <input
-                                type="radio"
-                                name="orderType"
-                                value="Dine-In"
-                                checked
-                            />
-                            Dine-In
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                name="orderType"
-                                value="Take-Out"
-                            />
-                            Take-Out
-                        </label>
-                        <br /><br />
+                            <!-- Extras Checkboxes -->
+                            <span class="emp">Extras</span>
+                            <div class="extras-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Price</th>
+                                            <th>Extras</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>₱15 (Essential Extras)</td>
+                                            <td>
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name="extras"
+                                                        data-cost="15"
+                                                        value="Wasabi"
+                                                    />
+                                                    Wasabi
+                                                </label>
+                                                <br />
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name="extras"
+                                                        data-cost="15"
+                                                        value="Pickled Ginger"
+                                                    />
+                                                    Pickled Ginger
+                                                </label>
+                                                <br />
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name="extras"
+                                                        data-cost="15"
+                                                        value="Soy Sauce"
+                                                    />
+                                                    Soy Sauce
+                                                </label>
+                                                <br />
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name="extras"
+                                                        data-cost="15"
+                                                        value="Sesame Seeds"
+                                                    />
+                                                    Sesame Seeds
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>₱25 (Enhanced Toppings)</td>
+                                            <td>
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name="extras"
+                                                        data-cost="25"
+                                                        value="Nori"
+                                                    />
+                                                    Nori
+                                                </label>
+                                                <br />
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name="extras"
+                                                        data-cost="25"
+                                                        value="Scallions"
+                                                    />
+                                                    Scallions
+                                                </label>
+                                                <br />
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name="extras"
+                                                        data-cost="25"
+                                                        value="Cucumber"
+                                                    />
+                                                    Cucumber
+                                                </label>
+                                                <br />
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name="extras"
+                                                        data-cost="25"
+                                                        value="Radish"
+                                                    />
+                                                    Radish
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>₱40 (Premium Toppings)</td>
+                                            <td>
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name="extras"
+                                                        data-cost="40"
+                                                        value="Tempura Flakes"
+                                                    />
+                                                    Tempura Flakes
+                                                </label>
+                                                <br />
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name="extras"
+                                                        data-cost="40"
+                                                        value="Fried Garlic"
+                                                    />
+                                                    Fried Garlic
+                                                </label>
+                                                <br />
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name="extras"
+                                                        data-cost="40"
+                                                        value="Fried Onions"
+                                                    />
+                                                    Fried Onions
+                                                </label>
+                                                <br />
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name="extras"
+                                                        data-cost="40"
+                                                        value="Unagi Sauce"
+                                                    />
+                                                    Unagi Sauce
+                                                </label>
+                                                <br />
+                                                <label>
+                                                    <input
+                                                        type="checkbox"
+                                                        name="extras"
+                                                        data-cost="40"
+                                                        value="Spicy Mayo"
+                                                    />
+                                                    Spicy Mayo
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                        <!-- Extras Checkboxes -->
-                        <h4>Extras</h4>
-                        <p>
-                            (Each item in a group adds that group's cost to the
-                            total)
-                        </p>
-
-                        <div>
-                            <strong>₱15 Group (Essential Extras)</strong><br />
-                            <label
-                                ><input
-                                    type="checkbox"
-                                    name="extras"
-                                    data-cost="15"
-                                    value="Wasabi"
-                                />
-                                Wasabi</label
-                            >
-                            <label
-                                ><input
-                                    type="checkbox"
-                                    name="extras"
-                                    data-cost="15"
-                                    value="Pickled Ginger"
-                                />
-                                Pickled Ginger</label
-                            >
-                            <label
-                                ><input
-                                    type="checkbox"
-                                    name="extras"
-                                    data-cost="15"
-                                    value="Soy Sauce"
-                                />
-                                Soy Sauce</label
-                            >
-                            <label
-                                ><input
-                                    type="checkbox"
-                                    name="extras"
-                                    data-cost="15"
-                                    value="Sesame Seeds"
-                                />
-                                Sesame Seeds</label
-                            >
+                            <div class="order-total">
+                                <span>Total Amount: </span>
+                                ₱<span id="orderTotal">0</span>
+                            </div>
                         </div>
-                        <br />
-
-                        <div>
-                            <strong>₱25 Group (Enhanced Toppings)</strong><br />
-                            <label
-                                ><input
-                                    type="checkbox"
-                                    name="extras"
-                                    data-cost="25"
-                                    value="Nori (Seaweed)"
-                                />
-                                Nori (Seaweed)</label
-                            >
-                            <label
-                                ><input
-                                    type="checkbox"
-                                    name="extras"
-                                    data-cost="25"
-                                    value="Scallions (Green Onions)"
-                                />
-                                Scallions (Green Onions)</label
-                            >
-                            <label
-                                ><input
-                                    type="checkbox"
-                                    name="extras"
-                                    data-cost="25"
-                                    value="Cucumber"
-                                />
-                                Cucumber</label
-                            >
-                            <label
-                                ><input
-                                    type="checkbox"
-                                    name="extras"
-                                    data-cost="25"
-                                    value="Radish (Daikon)"
-                                />
-                                Radish (Daikon)</label
-                            >
+                        <div class="order-buttons">
+                            <button id="cancelOrderBtn" class="cancel">
+                                Cancel
+                            </button>
+                            <button id="submitOrderBtn" class="submit">
+                                Submit Order
+                            </button>
                         </div>
-                        <br />
-
-                        <div>
-                            <strong>₱40 Group (Premium Toppings)</strong><br />
-                            <label
-                                ><input
-                                    type="checkbox"
-                                    name="extras"
-                                    data-cost="40"
-                                    value="Tempura Flakes"
-                                />
-                                Tempura Flakes</label
-                            >
-                            <label
-                                ><input
-                                    type="checkbox"
-                                    name="extras"
-                                    data-cost="40"
-                                    value="Fried Garlic"
-                                />
-                                Fried Garlic</label
-                            >
-                            <label
-                                ><input
-                                    type="checkbox"
-                                    name="extras"
-                                    data-cost="40"
-                                    value="Fried Onions"
-                                />
-                                Fried Onions</label
-                            >
-                            <label
-                                ><input
-                                    type="checkbox"
-                                    name="extras"
-                                    data-cost="40"
-                                    value="Unagi Sauce (Eel Sauce)"
-                                />
-                                Unagi Sauce (Eel Sauce)</label
-                            >
-                            <label
-                                ><input
-                                    type="checkbox"
-                                    name="extras"
-                                    data-cost="40"
-                                    value="Spicy Mayo"
-                                />
-                                Spicy Mayo</label
-                            >
-                        </div>
-
-                        <br />
-                        <p>
-                            <strong>Total Amount:</strong> ₱<span
-                                id="orderTotal"
-                                >0</span
-                            >
-                        </p>
-                        <br />
-
-                        <button id="submitOrderBtn">Submit Order</button>
-                        <button id="cancelOrderBtn">Cancel</button>
                     </div>
                 </div>
             </div>

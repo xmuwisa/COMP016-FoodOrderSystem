@@ -15,36 +15,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderCartItems() {
         if (cart.length === 0) {
-            cartItemsList.innerHTML = "<p>No items in cart.</p>";
+            cartItemsList.innerHTML =
+                "<div class='no-item'>Uh oh. No items here...</div>";
             return;
         }
 
         let html = "";
         cart.forEach((item, index) => {
             html += `
-          <div style="border: 1px solid #000; margin-bottom: 10px; padding: 10px;">
-            <img src="${item.image}" alt="${
-                item.name
-            }" width="80" height="80" />
-            <h3>${item.name}</h3>
-            <p>Quantity: ${item.quantity}</p>
-            ${
-                item.option
-                    ? `<p>${item.type === "sushi" ? "Spice" : "Size"}: ${
-                          item.option
-                      }</p>`
-                    : ""
-            }
-            <p>Unit Price: ₱${item.finalUnitPrice}</p>
-            <p>Total: ₱${item.totalCost}</p>
-            <button class="deleteItemBtn" data-index="${index}">Delete</button>
+            <div class="item">
+                <div class="item-cart">
+                    <img 
+                        src="${item.image}" 
+                        alt="${item.name}" 
+                    />
+                    <div class="item-info">
+                        <span class="name">${item.name}</span>
+                        <div><span>Quantity: </span>${item.quantity}</div>
+                        ${
+                            item.option
+                                ? `<div><span>${
+                                      item.type === "sushi" ? "Spice" : "Size"
+                                  }:</span> ${item.option}</div>`
+                                : ""
+                        }
+                        <div><span>Unit Price: </span>₱${
+                            item.finalUnitPrice
+                        }</div>
+                        <div class="total-amount"><span>Total: </span>₱${
+                            item.totalCost
+                        }</div>
+                        
+                        <div class="delete-item">
+                            <button data-index="${index}">Delete</button>
+                        </div>
+                        
+                    </div>
+                </div>
           </div>
         `;
         });
 
         cartItemsList.innerHTML = html;
 
-        const deleteButtons = document.querySelectorAll(".deleteItemBtn");
+        const deleteButtons = document.querySelectorAll(".delete-item");
         deleteButtons.forEach((btn) =>
             btn.addEventListener("click", (e) => {
                 const idx = parseInt(e.target.dataset.index, 10);
@@ -64,6 +78,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    clearCartButton.addEventListener("click", () => {
+        const userConfirmed = confirm(
+            "Are you sure you want to clear all items?"
+        );
+        if (userConfirmed) {
+            cart = [];
+            localStorage.removeItem("cart");
+            renderCartItems();
+        }
+    });
+
     orderNowButton.addEventListener("click", () => {
         if (cart.length === 0) {
             alert("Your cart is empty!");
@@ -77,22 +102,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let summaryHtml = "";
         let cartTotal = 0;
+        summaryHtml += `
+        <table class="order-summary-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Qty</th>
+                    <th>Type</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
         cart.forEach((item) => {
             summaryHtml += `
-          <div>
-            <strong>${item.name}</strong> (x${item.quantity})
-            ${
-                item.option
-                    ? `<em>[${item.type === "sushi" ? "Spice" : "Size"}: ${
-                          item.option
-                      }]</em>`
-                    : ""
-            }
-            - ₱${item.totalCost}
-          </div>
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.quantity}</td>
+                <td>
+                    ${
+                        item.option
+                            ? `<em>[${
+                                  item.type === "sushi" ? "Spice" : "Size"
+                              }: ${item.option}]</em>`
+                            : "N/A"
+                    }
+                </td>
+                <td>₱${item.totalCost}</td>
+            </tr>
         `;
             cartTotal += item.totalCost;
         });
+
+        // Close the table
+        summaryHtml += `
+            </tbody>
+        </table>
+    `;
 
         orderItemsSummary.innerHTML = summaryHtml;
         orderTotalElement.textContent = cartTotal;
